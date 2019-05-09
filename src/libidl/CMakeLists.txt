@@ -2,6 +2,7 @@ project(libidl VERSION 0.1 LANGUAGES CXX)
 
 add_library(idl
   src/atom.cpp
+  src/atom_type.cpp
   src/constraint.cpp
   src/slot.cpp
   src/specification.cpp

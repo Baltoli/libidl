@@ -1,12 +1,12 @@
 #pragma once
 
+#include "atom_type.h"
+
 #include <idl/slot.h>
 
 #include <vector>
 
 namespace idl {
-
-#include "atom_type.h"
 
 /**
  * Similar to constraints, IDL specifies a set of possible atom types. Unlike

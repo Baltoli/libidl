@@ -1,3 +1,9 @@
+#pragma once
+
+#include <string>
+
+namespace idl {
+
 enum class atom_type {
   integer_type,
   float_type,
@@ -52,7 +58,7 @@ enum class atom_type {
   pdg_dominate_strict,
   pdg_postdom_strict,
 
-  dfg_not_dominates,
+  dfg_not_dominate,
   dfg_not_postdom,
   dfg_not_dominate_strict,
   dfg_not_postdom_strict,
@@ -75,3 +81,7 @@ enum class atom_type {
 
   function_attribute
 };
+
+std::string print_atom_type(atom_type t);
+
+} // namespace idl
