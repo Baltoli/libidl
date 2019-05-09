@@ -4,6 +4,7 @@
 #include <idl/generic_formatter.h>
 #include <idl/slot.h>
 
+#include <type_traits>
 #include <vector>
 
 namespace idl {
@@ -21,6 +22,13 @@ public:
   template <typename... Slots>
   atom(atom_type, Slots...);
 
+  template <typename Iterator,
+      typename = std::enable_if_t<
+          std::is_same_v<std::iterator_traits<Iterator>::value_type, slot>>>
+  atom(atom_type, Iterator, Iterator);
+
+  atom(atom_type, std::vector<slot>);
+
   std::string to_string() const;
 
 private:
@@ -34,6 +42,13 @@ atom::atom(atom_type at, Slots... ss)
     , slots()
 {
   (slots.push_back(ss), ...);
+}
+
+template <typename Iterator, typename>
+atom::atom(atom_type at, Iterator b, Iterator e)
+    : type(at)
+    , slots(b, e)
+{
 }
 
 } // namespace idl
