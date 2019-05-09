@@ -1,3 +1,8 @@
 #pragma once
 
-namespace idl {}
+namespace idl {
+
+class specification {
+};
+
+} // namespace idl
