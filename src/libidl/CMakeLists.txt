@@ -25,6 +25,13 @@ install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 install(EXPORT IDLConfig DESTINATION share/IDL/cmake)
 
+add_executable(idl-app
+  test/app.cpp)
+
+target_link_libraries(idl-app
+  idl
+  CONAN_PKG::fmt)
+
 add_executable(idl-unit
   test/main.cpp)
 

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <idl/generic_formatter.h>
+
 #include <string>
 
 namespace idl {
@@ -16,10 +18,12 @@ class slot {
 public:
   slot(std::string);
 
-  std::string print() const;
+  std::string to_string() const;
 
 private:
   std::string open_slot;
 };
 
 } // namespace idl
+
+USE_TO_STRING_FORMAT(idl::slot)

@@ -9,10 +9,10 @@ slot::slot(std::string os)
 {
 }
 
-std::string slot::print() const
+std::string slot::to_string() const
 {
   using namespace fmt::literals;
-  return "\"{}\""_format(open_slot);
+  return R"(("slotbase", "{}"))"_format(open_slot);
 }
 
 } // namespace idl

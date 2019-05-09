@@ -4,10 +4,15 @@
 
 namespace idl {
 
-std::string atom::print() const
+std::string atom::to_string() const
 {
   using namespace fmt::literals;
-  return "";
+  if (slots.empty()) {
+    return R"(("atom", ("{}")))"_format(atom_type_to_string(type));
+  } else {
+    return R"(("atom", ("{}", {})))"_format(
+        atom_type_to_string(type), fmt::join(slots, ", "));
+  }
 }
 
 } // namespace idl

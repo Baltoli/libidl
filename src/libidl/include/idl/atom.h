@@ -1,7 +1,7 @@
 #pragma once
 
-#include "atom_type.h"
-
+#include <idl/atom_type.h>
+#include <idl/generic_formatter.h>
 #include <idl/slot.h>
 
 #include <vector>
@@ -18,11 +18,24 @@ namespace idl {
  */
 class atom {
 public:
-  std::string print() const;
+  template <typename... Slots>
+  atom(atom_type, Slots...);
+
+  std::string to_string() const;
 
 private:
   atom_type type;
   std::vector<slot> slots;
 };
 
+template <typename... Slots>
+atom::atom(atom_type at, Slots... ss)
+    : type(at)
+    , slots()
+{
+  (slots.push_back(ss), ...);
+}
+
 } // namespace idl
+
+USE_TO_STRING_FORMAT(idl::atom)

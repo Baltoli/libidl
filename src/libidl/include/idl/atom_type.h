@@ -82,6 +82,6 @@ enum class atom_type {
   function_attribute
 };
 
-std::string print_atom_type(atom_type t);
+std::string atom_type_to_string(atom_type t);
 
 } // namespace idl

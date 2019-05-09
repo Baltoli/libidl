@@ -1,8 +1,8 @@
-#include "atom_type.h"
+#include <idl/atom_type.h>
 
 namespace idl {
 
-std::string print_atom_type(atom_type t)
+std::string atom_type_to_string(atom_type t)
 {
   switch (t) {
   case atom_type::integer_type:
