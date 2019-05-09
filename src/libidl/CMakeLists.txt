@@ -1,7 +1,8 @@
 project(libidl VERSION 0.1 LANGUAGES CXX)
 
 add_library(idl
-  src/lib.cpp)
+  src/specification.cpp
+)
 
 target_include_directories(idl PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
