@@ -1,6 +1,8 @@
 project(libidl VERSION 0.1 LANGUAGES CXX)
 
 add_library(idl
+  src/constraint.cpp
+  src/slot.cpp
   src/specification.cpp
 )
 
