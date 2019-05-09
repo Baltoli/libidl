@@ -2,6 +2,8 @@
 
 #include <fmt/format.h>
 
+#include <memory>
+
 namespace fmt {
 
 template <typename T>
@@ -19,6 +21,21 @@ struct to_string_fmt {
   }
 };
 
+template <typename T>
+struct up_to_string_fmt {
+  template <typename ParseContext>
+  constexpr auto parse(ParseContext& ctx)
+  {
+    return ctx.begin();
+  }
+
+  template <typename FormatContext>
+  auto format(std::unique_ptr<T> const& t, FormatContext& ctx)
+  {
+    return format_to(ctx.out(), "{}", t->to_string());
+  }
+};
+
 } // namespace fmt
 
 // clang-format off
@@ -27,6 +44,13 @@ struct to_string_fmt {
 namespace fmt { \
 template <> \
 struct formatter<cls> : to_string_fmt<cls> { \
+}; \
+}
+
+#define USE_UP_TO_STRING_FORMAT(cls) \
+namespace fmt { \
+template <> \
+struct formatter<std::unique_ptr<cls>> : up_to_string_fmt<cls> { \
 }; \
 }
 
