@@ -16,6 +16,8 @@ class slot {
 public:
   slot(std::string);
 
+  std::string print() const;
+
 private:
   std::string open_slot;
 };

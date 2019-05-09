@@ -1,9 +1,14 @@
 project(libidl VERSION 0.1 LANGUAGES CXX)
 
 add_library(idl
+  src/atom.cpp
   src/constraint.cpp
   src/slot.cpp
   src/specification.cpp
+)
+
+target_link_libraries(idl
+  CONAN_PKG::fmt
 )
 
 target_include_directories(idl PUBLIC

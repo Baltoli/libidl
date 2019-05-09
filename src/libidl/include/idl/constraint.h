@@ -1,5 +1,8 @@
 #pragma once
 
+#include <idl/constraint.h>
+#include <idl/slot.h>
+
 #include <string>
 
 namespace idl {
