@@ -1,10 +1,14 @@
 #include <idl/specification.h>
 
+#include <fmt/format.h>
+
 namespace idl {
 
-specification::specification(std::string n)
-    : name(n)
+std::string specification::to_string() const
 {
+  using namespace fmt::literals;
+
+  return R"(("specification", "{}", {}))"_format(name_, constraint_);
 }
 
 } // namespace idl

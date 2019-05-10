@@ -65,6 +65,5 @@ private:
 
 USE_VP_TO_STRING_FORMAT(idl::constraint)
 
-USE_TO_STRING_FORMAT(idl::constraint)
 USE_TO_STRING_FORMAT(idl::atom_adaptor)
 USE_TO_STRING_FORMAT(idl::conjunction)
