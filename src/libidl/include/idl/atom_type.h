@@ -20,10 +20,6 @@ enum class atom_type {
   argument,
   instruction,
 
-  indir_opcode_1,
-  indir_opcode_2,
-  opcode,
-
   same,
   distinct,
   block,

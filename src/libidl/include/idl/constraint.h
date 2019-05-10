@@ -3,6 +3,7 @@
 #include <idl/atom.h>
 #include <idl/constraint.h>
 #include <idl/generic_formatter.h>
+#include <idl/opcode_type.h>
 #include <idl/slot.h>
 
 #include <value_ptr/value_ptr.h>
@@ -105,6 +106,20 @@ inherit_from::inherit_from(Constraint c)
     : constraint_(bsc::make_val<Constraint>(c))
 {
 }
+
+/**
+ * Specifies that a the value filling a slot must have a particular opcode.
+ */
+class opcode : public constraint {
+public:
+  opcode(slot, opcode_type);
+
+  std::string to_string() const override;
+
+private:
+  bsc::value_ptr<slot> slot_;
+  opcode_type type_;
+};
 
 } // namespace idl
 

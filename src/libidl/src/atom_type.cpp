@@ -32,13 +32,6 @@ std::string atom_type_to_string(atom_type t)
   case atom_type::instruction:
     return "ConstraintInstruction";
 
-  case atom_type::indir_opcode_1:
-    return "ConstraintIndirOpcode1";
-  case atom_type::indir_opcode_2:
-    return "ConstraintIndirOpcode2";
-  case atom_type::opcode:
-    return "ConstraintOpcode";
-
   case atom_type::same:
     return "ConstraintSame";
   case atom_type::distinct:

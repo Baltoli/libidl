@@ -26,4 +26,5 @@ private:
 
 } // namespace idl
 
+USE_VP_TO_STRING_FORMAT(idl::slot)
 USE_TO_STRING_FORMAT(idl::slot)

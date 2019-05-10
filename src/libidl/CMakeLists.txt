@@ -4,6 +4,7 @@ add_library(idl
   src/atom.cpp
   src/atom_type.cpp
   src/constraint.cpp
+  src/opcode_type.cpp
   src/slot.cpp
   src/specification.cpp
 )
