@@ -81,6 +81,31 @@ private:
   std::vector<bsc::value_ptr<constraint>> operands_;
 };
 
+/**
+ * An inheritance constraint. This specifies that this constraint must satisfy
+ * the full set of requirements that the constraint it inherits from does - this
+ * will be able to be used with a renaming constraint to change the name of
+ * slots from the inherited constraint.
+ */
+class inherit_from : public constraint {
+public:
+  template <typename Constraint>
+  inherit_from(Constraint c);
+
+  inherit_from(bsc::value_ptr<constraint>);
+
+  std::string to_string() const override;
+
+private:
+  bsc::value_ptr<constraint> constraint_;
+};
+
+template <typename Constraint>
+inherit_from::inherit_from(Constraint c)
+    : constraint_(bsc::make_val<Constraint>(c))
+{
+}
+
 } // namespace idl
 
 USE_VP_TO_STRING_FORMAT(idl::constraint)
