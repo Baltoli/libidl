@@ -20,7 +20,7 @@ namespace idl {
 class atom {
 public:
   template <typename... Slots>
-  atom(atom_type, Slots...);
+  explicit atom(atom_type, Slots...);
 
   template <typename Iterator,
       typename = std::enable_if_t<

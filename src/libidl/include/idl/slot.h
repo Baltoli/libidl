@@ -16,7 +16,7 @@ namespace idl {
  */
 class slot {
 public:
-  slot(std::string);
+  explicit slot(std::string);
 
   std::string to_string() const;
 

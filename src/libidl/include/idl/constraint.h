@@ -33,7 +33,7 @@ public:
  */
 class atom_adaptor : public constraint {
 public:
-  atom_adaptor(atom);
+  explicit atom_adaptor(atom);
 
   std::string to_string() const override;
 
@@ -48,7 +48,7 @@ private:
 class conjunction : public constraint {
 public:
   template <typename... Operands>
-  conjunction(Operands... ops)
+  explicit conjunction(Operands... ops)
   {
     (operands_.emplace_back(new Operands(ops)), ...);
   }
