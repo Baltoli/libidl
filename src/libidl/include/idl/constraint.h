@@ -51,6 +51,7 @@ class conjunction : public constraint {
 public:
   template <typename... Operands>
   explicit conjunction(Operands... ops)
+      : operands_()
   {
     (operands_.emplace_back(new Operands(ops)), ...);
   }
@@ -58,7 +59,26 @@ public:
   std::string to_string() const override;
 
 private:
-  std::vector<bsc::value_ptr<constraint>> operands_ = {};
+  std::vector<bsc::value_ptr<constraint>> operands_;
+};
+
+/**
+ * A disjunction of constraints. One of the sub-constraints must be satisfied
+ * for this constraint to also be satisfied.
+ */
+class disjunction : public constraint {
+public:
+  template <typename... Operands>
+  explicit disjunction(Operands... ops)
+      : operands_()
+  {
+    (operands_.emplace_back(new Operands(ops)), ...);
+  }
+
+  std::string to_string() const override;
+
+private:
+  std::vector<bsc::value_ptr<constraint>> operands_;
 };
 
 } // namespace idl

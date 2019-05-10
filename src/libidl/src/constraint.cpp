@@ -22,4 +22,15 @@ std::string conjunction::to_string() const
   }
 }
 
+std::string disjunction::to_string() const
+{
+  using namespace fmt::literals;
+
+  if (operands_.empty()) {
+    return R"(("disjunction"))";
+  } else {
+    return R"(("disjunction", {}))"_format(fmt::join(operands_, ", "));
+  }
+}
+
 } // namespace idl
