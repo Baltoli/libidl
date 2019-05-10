@@ -10,6 +10,7 @@ add_library(idl
 
 target_link_libraries(idl
   CONAN_PKG::fmt
+  CONAN_PKG::value-ptr
 )
 
 target_include_directories(idl PUBLIC

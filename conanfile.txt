@@ -1,6 +1,7 @@
 [requires]
 Catch2/2.6.1@catchorg/stable
 fmt/5.2.0@bincrafters/stable
+value-ptr/0.1@baltoli/stable
 
 [generators]
 cmake
