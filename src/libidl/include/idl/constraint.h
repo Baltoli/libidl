@@ -5,6 +5,8 @@
 #include <idl/generic_formatter.h>
 #include <idl/slot.h>
 
+#include <value_ptr/value_ptr.h>
+
 #include <memory>
 #include <string>
 #include <vector>
@@ -56,12 +58,12 @@ public:
   std::string to_string() const override;
 
 private:
-  std::vector<std::unique_ptr<constraint>> operands_ = {};
+  std::vector<bsc::value_ptr<constraint>> operands_ = {};
 };
 
 } // namespace idl
 
-USE_UP_TO_STRING_FORMAT(idl::constraint)
+USE_VP_TO_STRING_FORMAT(idl::constraint)
 
 USE_TO_STRING_FORMAT(idl::constraint)
 USE_TO_STRING_FORMAT(idl::atom_adaptor)

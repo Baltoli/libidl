@@ -1,5 +1,7 @@
 #pragma once
 
+#include <value_ptr/value_ptr.h>
+
 #include <fmt/format.h>
 
 #include <memory>
@@ -30,7 +32,7 @@ struct up_to_string_fmt {
   }
 
   template <typename FormatContext>
-  auto format(std::unique_ptr<T> const& t, FormatContext& ctx)
+  auto format(bsc::value_ptr<T> const& t, FormatContext& ctx)
   {
     return format_to(ctx.out(), "{}", t->to_string());
   }
@@ -47,10 +49,10 @@ struct formatter<cls> : to_string_fmt<cls> { \
 }; \
 }
 
-#define USE_UP_TO_STRING_FORMAT(cls) \
+#define USE_VP_TO_STRING_FORMAT(cls) \
 namespace fmt { \
 template <> \
-struct formatter<std::unique_ptr<cls>> : up_to_string_fmt<cls> { \
+struct formatter<bsc::value_ptr<cls>> : up_to_string_fmt<cls> { \
 }; \
 }
 
