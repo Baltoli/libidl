@@ -6,11 +6,28 @@ using namespace idl;
 
 int main()
 {
-  auto a = atom(atom_type::dfg_dominate, slot("first"), slot("Seocnd"));
-  auto c = conjunction(atom_adaptor(a), atom_adaptor(a));
+  // clang-format off
 
-  auto d = conjunction(
-      inherit_from(c), opcode(slot("first"), opcode_type::branch));
-  auto s = specification("spec_name", d);
-  fmt::print("{}\n", s);
+  auto sese = conjunction(
+    opcode(slot("precursor"), opcode_type::branch),
+    atom_adaptor(atom(atom_type::cfg_edge, slot("precursor"), slot("begin"))),
+    opcode(slot("end"), opcode_type::branch),
+    atom_adaptor(atom(atom_type::cfg_edge, slot("end"), slot("successor"))),
+    atom_adaptor(atom(atom_type::cfg_dominate, slot("begin"), slot("end"))),
+    atom_adaptor(atom(atom_type::cfg_postdom, slot("end"), slot("begin"))),
+    atom_adaptor(atom(atom_type::cfg_dominate_strict, slot("precursor"), slot("begin"))),
+    atom_adaptor(atom(atom_type::cfg_postdom_strict, slot("successor"), slot("end"))),
+    atom_adaptor(atom(atom_type::cfg_blocked, slot("begin"), slot("precursor"), slot("end"))),
+    atom_adaptor(atom(atom_type::cfg_blocked, slot("successor"), slot("end"), slot("begin")))
+  );
+
+  auto loop = conjunction(
+    inherit_from(sese),
+    atom_adaptor(atom(atom_type::cfg_edge, slot("begin"), slot("end")))
+  );
+
+  // clang-format on
+
+  auto spec = specification("Loop", loop);
+  fmt::print("({},)\n", spec);
 }
