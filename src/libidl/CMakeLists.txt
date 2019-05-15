@@ -8,8 +8,9 @@ add_custom_command(
   COMMAND echo "#include <string>"                                >  ${CODE_GEN_SRC_OUT}
   COMMAND echo "using namespace std::literals::string_literals;"  >> ${CODE_GEN_SRC_OUT}
   COMMAND echo "namespace idl {"                                  >> ${CODE_GEN_SRC_OUT}
-  COMMAND echo "auto code_gen_src = R\"("                         >> ${CODE_GEN_SRC_OUT}
-  COMMAND echo ")\"s;"                                            >> ${CODE_GEN_SRC_OUT}
+  COMMAND echo "auto code_gen_src = R\"***("                         >> ${CODE_GEN_SRC_OUT}
+  COMMAND cat ${CODE_GEN_PY}                                      >> ${CODE_GEN_SRC_OUT}
+  COMMAND echo ")***\"s;"                                            >> ${CODE_GEN_SRC_OUT}
   COMMAND echo "}"                                                >> ${CODE_GEN_SRC_OUT}
   VERBATIM
   MAIN_DEPENDENCY ${CODE_GEN_PY})

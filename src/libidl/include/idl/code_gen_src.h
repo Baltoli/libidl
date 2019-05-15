@@ -4,5 +4,5 @@
 
 namespace idl {
 
-std::string code_gen_src;
+extern std::string code_gen_src;
 }
