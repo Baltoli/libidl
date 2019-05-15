@@ -461,26 +461,26 @@ def print_syntax_tree(syntax, indent=0):
         for s in syntax:
             print_syntax_tree(s, indent+1)
 
-import argparse
-import sys
-import itertools
+# import argparse
+# import sys
+# import itertools
 
-sys.setrecursionlimit(10000)
+# sys.setrecursionlimit(10000)
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description='Convert parsed IDL to C++ code'
-    )
+# if __name__ == "__main__":
+#     parser = argparse.ArgumentParser(
+#         description='Convert parsed IDL to C++ code'
+#     )
 
-    parser.add_argument('--infile', nargs='?',
-            type=argparse.FileType('r'),
-            default=sys.stdin)
+#     parser.add_argument('--infile', nargs='?',
+#             type=argparse.FileType('r'),
+#             default=sys.stdin)
 
-    parser.add_argument('--idiom')
+#     parser.add_argument('--idiom')
 
-    args = parser.parse_args()
+#     args = parser.parse_args()
     
-    if args.idiom and args.idiom in blacklist:
-        blacklist.remove(args.idiom)
-    cpp = generate_cpp_code(eval(args.infile.read()))
-    print(cpp)
+#     if args.idiom and args.idiom in blacklist:
+#         blacklist.remove(args.idiom)
+#     cpp = generate_cpp_code(eval(args.infile.read()))
+#     print(cpp)
