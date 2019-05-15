@@ -2,6 +2,8 @@
 
 #include <fmt/format.h>
 
+#include <idl/code_gen_src.h>
+
 using namespace idl;
 
 int main()
@@ -30,4 +32,6 @@ int main()
 
   auto spec = specification("Loop", loop);
   fmt::print("({},)\n", spec);
+
+  fmt::print("{}\n", code_gen_src);
 }
