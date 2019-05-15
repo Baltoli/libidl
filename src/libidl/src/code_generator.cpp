@@ -8,7 +8,7 @@ code_generator::~code_generator() {}
 
 std::string code_generator::generate_from(specification const& s) const
 {
-  return s.to_string();
+  return "";
 }
 
 } // namespace idl

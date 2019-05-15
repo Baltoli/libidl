@@ -7,6 +7,10 @@
 
 namespace idl {
 
+/**
+ * In the future we might want to change the ownership semantics around the
+ * Python interpreter stored by this object.
+ */
 class code_generator {
 public:
   /**
@@ -22,6 +26,18 @@ public:
    * Shut down the python interpreter when we're done generating code.
    */
   ~code_generator();
+
+  /**
+   * This shouldn't be copyable - if you have an instance, it will behave the
+   * same as any other instance.
+   */
+  code_generator(code_generator const&) = delete;
+
+  /**
+   * Similarly, don't allow this to be moved - keep one instance around and have
+   * it be responsible for setting up and tearing down the interpreter.
+   */
+  code_generator(code_generator&&) = delete;
 
   std::string generate_from(specification const&) const;
 

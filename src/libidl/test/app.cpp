@@ -29,5 +29,7 @@ int main()
   // clang-format on
 
   auto spec = specification("Loop", loop);
-  fmt::print("({},)\n", spec);
+  auto gen = code_generator();
+
+  fmt::print("{}\n", gen.generate_from(spec));
 }
