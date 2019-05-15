@@ -2,8 +2,6 @@
 
 #include <idl/specification.h>
 
-#include <Python.h>
-
 namespace idl {
 
 /**
@@ -41,7 +39,6 @@ public:
   std::string generate_from(specification const&) const;
 
 private:
-  PyObject* module_from_source(std::string const&) const;
 };
 
 } // namespace idl

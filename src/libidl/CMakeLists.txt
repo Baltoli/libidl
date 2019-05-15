@@ -24,6 +24,7 @@ add_library(idl
   src/code_generator.cpp
   src/constraint.cpp
   src/opcode_type.cpp
+  src/python_utils.cpp
   src/slot.cpp
   src/specification.cpp
 
