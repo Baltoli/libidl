@@ -1,5 +1,22 @@
 project(libidl VERSION 0.1 LANGUAGES CXX)
 
+set(CODE_GEN_PY "${CMAKE_CURRENT_SOURCE_DIR}/resources/code_gen.py")
+set(CODE_GEN_SRC_OUT "code_gen_src.cpp")
+
+add_custom_command(
+  OUTPUT ${CODE_GEN_SRC_OUT}
+  COMMAND echo "#include <string>"                                >  ${CODE_GEN_SRC_OUT}
+  COMMAND echo "using namespace std::literals::string_literals;"  >> ${CODE_GEN_SRC_OUT}
+  COMMAND echo "namespace idl {"                                  >> ${CODE_GEN_SRC_OUT}
+  COMMAND echo "auto code_gen_src = R\"("                         >> ${CODE_GEN_SRC_OUT}
+  COMMAND echo ")\"s;"                                            >> ${CODE_GEN_SRC_OUT}
+  COMMAND echo "}"                                                >> ${CODE_GEN_SRC_OUT}
+  VERBATIM
+  MAIN_DEPENDENCY ${CODE_GEN_PY})
+
+add_custom_target(code-gen-src
+  ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${CODE_GEN_SRC_OUT})
+
 add_library(idl
   src/atom.cpp
   src/atom_type.cpp
@@ -8,7 +25,14 @@ add_library(idl
   src/opcode_type.cpp
   src/slot.cpp
   src/specification.cpp
+
+  ${CODE_GEN_SRC_OUT}
 )
+
+add_dependencies(idl code-gen-src)
+
+target_include_directories(idl
+  PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 
 target_link_libraries(idl
   CONAN_PKG::fmt

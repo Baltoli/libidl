@@ -6,3 +6,6 @@ python_dev_config/0.6@bincrafters/stable
 
 [generators]
 cmake
+
+[options]
+python_dev_config:python=python3
