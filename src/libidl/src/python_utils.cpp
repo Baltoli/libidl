@@ -34,9 +34,31 @@ code_gen_wrap& code_gen_wrap::operator=(code_gen_wrap other)
   return *this;
 }
 
-std::string code_gen_wrap::operator()(std::string const&) const
+std::string code_gen_wrap::operator()(std::string const& in) const
 {
-  return "woop";
+  auto py_str = PyUnicode_FromString(in.c_str());
+  auto args = PyTuple_New(1);
+  PyTuple_SetItem(args, 0, py_str);
+
+  auto ret = PyObject_CallObject(func_, args);
+  if (!ret) {
+    PyErr_Print();
+    throw std::runtime_error("Error calling object with string");
+  }
+
+  if (!PyUnicode_Check(ret)) {
+    throw std::runtime_error("Returned object is not a string");
+  }
+
+  auto ret_str = PyUnicode_AsUTF8(ret);
+  if (!ret_str) {
+    throw std::runtime_error("Couldn't convert back to C string");
+  }
+
+  Py_DECREF(ret);
+  Py_DECREF(args);
+
+  return std::string(ret_str);
 }
 
 PyObject* module_from_source(std::string const& src)

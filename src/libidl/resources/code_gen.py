@@ -1,11 +1,6 @@
-#!/usr/bin/pypy
+import itertools
 
-blacklist = ["SPMV_BASE", "ForNest", "SameSESE", "DotProductLoop",
-             "GeneralDotProduct", "ReadRange", "For", "MatrixStore",
-             "MatrixRead", "VectorStore", "VectorRead", "PermMultidStore",
-             "PermMultidRead", "AffineAccess", "Addition", "Multiplication",
-             "Permute", "Concat", "SumChain", "MulChain", "ArgumentsPermuted",
-             "Loop", "InductionVar", "LocalConst"]
+blacklist = []
 whitelist = []
 
 def partial_evaluator(syntax, handler, *extras):
@@ -423,6 +418,9 @@ def generate_fast_cpp_specification(syntax, specs):
                     +["}"])
 
 def generate_cpp_code(syntax_list):
+    if type(syntax_list) is str:
+        syntax_list = (eval(syntax_list),)
+    #print(syntax_list)
     includes  = ["BackendSpecializations", "BackendDirectClasses", "BackendSelectors"]
     specs     = {spec[1] : spec[2] for spec in syntax_list}
 
@@ -460,27 +458,3 @@ def print_syntax_tree(syntax, indent=0):
     elif type(syntax) is tuple:
         for s in syntax:
             print_syntax_tree(s, indent+1)
-
-# import argparse
-# import sys
-# import itertools
-
-# sys.setrecursionlimit(10000)
-
-# if __name__ == "__main__":
-#     parser = argparse.ArgumentParser(
-#         description='Convert parsed IDL to C++ code'
-#     )
-
-#     parser.add_argument('--infile', nargs='?',
-#             type=argparse.FileType('r'),
-#             default=sys.stdin)
-
-#     parser.add_argument('--idiom')
-
-#     args = parser.parse_args()
-    
-#     if args.idiom and args.idiom in blacklist:
-#         blacklist.remove(args.idiom)
-#     cpp = generate_cpp_code(eval(args.infile.read()))
-#     print(cpp)
