@@ -1,6 +1,5 @@
 #pragma once
 
-#include <idl/internal/code_gen_src.h>
 #include <idl/specification.h>
 
 #include <Python.h>
