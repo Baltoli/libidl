@@ -15,6 +15,12 @@ conan_cmake_run(CONANFILE "../conanfile.txt"
                 BASIC_SETUP CMAKE_TARGETS
                 BUILD missing)
 
+find_package(LLVM 7 REQUIRED CONFIG)
+include_directories(SYSTEM ${LLVM_INCLUDE_DIRS})
+add_definitions(${LLVM_DEFINITIONS})
+llvm_map_components_to_libnames(llvm_libs
+  support core)
+
 include(GNUInstallDirs)
 enable_testing()
 
