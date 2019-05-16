@@ -420,7 +420,7 @@ def generate_fast_cpp_specification(syntax, specs):
 def generate_cpp_code(syntax_list):
     if type(syntax_list) is str:
         syntax_list = (eval(syntax_list),)
-    #print(syntax_list)
+
     includes  = ["BackendSpecializations", "BackendDirectClasses", "BackendSelectors"]
     specs     = {spec[1] : spec[2] for spec in syntax_list}
 

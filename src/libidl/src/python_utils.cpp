@@ -50,15 +50,23 @@ std::string code_gen_wrap::operator()(std::string const& in) const
     throw std::runtime_error("Returned object is not a string");
   }
 
-  auto ret_str = PyUnicode_AsUTF8(ret);
-  if (!ret_str) {
-    throw std::runtime_error("Couldn't convert back to C string");
+  auto bytes = PyUnicode_AsUTF8String(ret);
+  if (!bytes) {
+    throw std::runtime_error("Codec error");
   }
 
+  auto ret_str = PyBytes_AsString(bytes);
+  if (!ret_str) {
+    throw std::runtime_error("Byte conversion error");
+  }
+
+  auto cpp_str = std::string(ret_str);
+
+  Py_DECREF(bytes);
   Py_DECREF(ret);
   Py_DECREF(args);
 
-  return std::string(ret_str);
+  return cpp_str;
 }
 
 PyObject* module_from_source(std::string const& src)
