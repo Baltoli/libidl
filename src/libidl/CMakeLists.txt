@@ -37,6 +37,7 @@ target_include_directories(idl
   PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 
 target_link_libraries(idl
+  ${llvm_libs}
   CONAN_PKG::fmt
   CONAN_PKG::value-ptr
   CONAN_PKG::python_dev_config
