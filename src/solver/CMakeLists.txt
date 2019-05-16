@@ -1,18 +1,32 @@
-add_llvm_library(LLVMIDLSolver
+project(solver VERSION 0.1 LANGUAGES CXX)
 
-  Solver.cpp
-  Solution.cpp
-  FunctionWrap.cpp
+add_library(solver
+  src/Solver.cpp
+  src/Solution.cpp
+  src/FunctionWrap.cpp
 
-  BackendEdge.cpp
-  BackendSingle.cpp
-  BackendCollect.cpp
-  BackendDominate.cpp
-  BackendOrdering.cpp
-  BackendSameSets.cpp
-  BackendIncomingValue.cpp
-  BackendSpecializations.cpp
-
-  DEPENDS
-  intrinsics_gen
+  src/BackendEdge.cpp
+  src/BackendSingle.cpp
+  src/BackendCollect.cpp
+  src/BackendDominate.cpp
+  src/BackendOrdering.cpp
+  src/BackendSameSets.cpp
+  src/BackendIncomingValue.cpp
+  src/BackendSpecializations.cpp
 )
+
+target_link_libraries(solver
+  ${llvm_libs})
+
+target_include_directories(solver PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+  PRIVATE src)
+
+install(TARGETS solver EXPORT SolverConfig
+    ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR})  # This is for Windows
+install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+install(EXPORT SolverConfig DESTINATION share/Solver/cmake)

@@ -25,3 +25,4 @@ include(GNUInstallDirs)
 enable_testing()
 
 add_subdirectory(libidl)
+add_subdirectory(solver)
